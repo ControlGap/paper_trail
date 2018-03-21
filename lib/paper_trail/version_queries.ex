@@ -101,6 +101,10 @@ defmodule PaperTrail.VersionQueries do
     @repo.get(("Elixir." <> version.item_type) |> String.to_existing_atom(), version.item_id)
   end
 
+  defp version_query(item_type, id) when is_integer(id) do
+    from(v in Version, where: v.item_type == ^item_type and v.item_id == ^Integer.to_string(id))
+  end
+
   defp version_query(item_type, id) do
     from(v in Version, where: v.item_type == ^item_type and v.item_id == ^id)
   end

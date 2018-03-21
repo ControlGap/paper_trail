@@ -33,6 +33,7 @@ defmodule PaperTrail do
                 first_version_id: version_id,
                 current_version_id: version_id
               })
+
             initial_version = make_version_struct(%{event: "insert"}, changeset_data, options)
             repo.insert(initial_version)
           end)
@@ -358,5 +359,14 @@ defmodule PaperTrail do
 
   def get_model_id(model) do
     Map.get(model, List.first(model.__struct__.__schema__(:primary_key)))
+    |> item_id_to_string()
+  end
+
+  defp item_id_to_string(id) when is_integer(id) do
+    Integer.to_string(id)
+  end
+
+  defp item_id_to_string(id) when is_binary(id) do
+    id
   end
 end
