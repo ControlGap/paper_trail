@@ -185,6 +185,8 @@ You can specify setter/originator relationship to paper_trail versions with ```o
   # For most applications originator should be the user since models can be updated/created/deleted by several users.
 ```
 
+Note: You will need to recompile your deps after you have added the config for originator. 
+
 Then originator name could be used for querying and preloading. Originator setting must be done via ```:originator``` or originator name that is defined in the paper_trail configuration:
 
 ```elixir
@@ -447,6 +449,7 @@ Many thanks to:
 - [Mitchell Henke](https://github.com/mitchellhenke) - Fixed weird elixir compiler warnings
 - [Iván González](https://github.com/dreamingechoes) - Multi tenancy feature and some minor refactors
 - [Teo Choong Ping](https://github.com/seymores) - Fixed paper_trail references for newer Elixir versions
+- [devvit](https://github.com/devvit) - Added non-regular primary key tracking support
 - [Izel Nakri](https://github.com/izelnakri) - The Originator of this library. See what I did there ;)
 
 Additional thanks to:
