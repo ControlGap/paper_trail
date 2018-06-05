@@ -58,7 +58,7 @@ defmodule PaperTrail.VersionQueries do
   @doc """
   Gets the last version of a record given its module reference and its id.
   """
-  @spec get_version(model :: module, id :: pos_integer | iodata ) :: Ecto.Query.t()
+  @spec get_version(model :: module, id :: pos_integer | iodata) :: Ecto.Query.t()
   def get_version(model, id) when is_atom(model) and is_integer(id),
     do: get_version(model, id, [])
 
@@ -99,6 +99,17 @@ defmodule PaperTrail.VersionQueries do
   """
   def get_current_model(version) do
     @repo.get(("Elixir." <> version.item_type) |> String.to_existing_atom(), version.item_id)
+  end
+
+  defp version_query(item_type, id) when is_integer(id) do
+    item_id =
+      if Application.get_env(:paper_trail, :item_type, :integer) === :string do
+        Integer.to_string(id)
+      else
+        id
+      end
+
+    from(v in Version, where: v.item_type == ^item_type and v.item_id == ^item_id)
   end
 
   defp version_query(item_type, id) do
