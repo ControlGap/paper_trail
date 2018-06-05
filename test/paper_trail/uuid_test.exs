@@ -82,4 +82,17 @@ defmodule PaperTrailTest.UUIDTest do
       assert version.item_id == item.item_id
     end
   end
+
+  test "test STRING primary key querying versions" do
+    if PaperTrail.Version.__schema__(:type, :item_id) == :string do
+      item =
+        %BarItem{}
+        |> BarItem.changeset(%{item_id: "#{:os.system_time}", title: "hello"})
+        |> PaperTrail.insert!()
+
+       vers = PaperTrail.get_versions(BarItem, item.id)
+
+       assert length(vers) > 0
+    end
+  end
 end
