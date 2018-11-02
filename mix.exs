@@ -27,9 +27,9 @@ defmodule PaperTrail.Mixfile do
   defp deps do
     [
       {:ecto, ">= 2.1.0"},
-      {:poison, ">= 3.1.0 or >= 2.0.0"},
+      {:poison, ">= 3.1.0 or >= 2.0.0", only: :test},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:postgrex, "~> 0.13.0"}
+      {:postgrex, ">= 0.13.0"}
     ]
   end
 
