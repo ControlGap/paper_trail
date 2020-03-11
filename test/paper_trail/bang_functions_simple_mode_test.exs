@@ -1002,6 +1002,6 @@ defmodule PaperTrailTest.SimpleModeBangFunctions do
   end
 
   defp convert_to_string_map(map) do
-    map |> Poison.encode!() |> Poison.decode!()
+    map |> Jason.encode!() |> Jason.decode!()
   end
 end

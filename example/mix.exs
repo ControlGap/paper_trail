@@ -2,12 +2,14 @@ defmodule Example.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :example,
-     version: "0.1.0",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :example,
+      version: "0.1.0",
+      elixir: "~> 1.3",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -32,8 +34,9 @@ defmodule Example.Mixfile do
   defp deps do
     [
       {:postgrex, ">= 0.0.0"},
-      {:ecto, ">= 2.0.2"},
-      {:poison, ">= 2.1.0"},
+      {:ecto, "~> 3.3"},
+      {:ecto_sql, "~> 3.3.4"},
+      {:jason, "~> 1.0"},
       {:paper_trail, ">= 0.7.3"}
     ]
   end
